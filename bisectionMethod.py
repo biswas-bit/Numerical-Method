@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 def f(x):
     equation=np.cos(x)+2*np.sin(x)-x*x;
@@ -27,9 +28,25 @@ def bisectionMethod(x0,x1,er=1e-3,maxItr=100):
             x1=xm
         else:
             x0=xm
-    return x0+x1/2
+    return (x0+x1)/2
 print(initialGuess())
-print(bisectionMethod(x0,x1))
+root=bisectionMethod(x0,x1)
+print(root)
+
+x_vals=np.linspace(-5,10,1000) # puts the range
+y_vals=f(x_vals)
+
+plt.figure(figsize=(10,6))  # gives the size of window
+plt.plot(x_vals, y_vals ,label="f(x) = cos(x) + 2sin(x) - x²",color="blue") # x-axis
+plt.axhline(0,color="black", linestyle="--",linewidth=1)
+plt.axvline(root,color='red',linestyle='--',label=f"root ≈ {root:.4f}") #root marker
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.title("graph of f(x) with Root approximation")
+plt.legend()
+plt.grid()
+
+plt.show()
         
                        
                 
